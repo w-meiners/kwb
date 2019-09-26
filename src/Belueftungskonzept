@@ -1,0 +1,207 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "slide"
+    }
+   },
+   "source": [
+    "# Notwendigkeit eines Belüftungskonzeptes"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "source": [
+    "Ein Belüftungskonzept ist nach DIN 1946-6 notwendig, wenn die natürliche Belüftung des Gebäudes - der Infiltrationsvolumenstrom - nicht für den Feuchteschutz des Gebäudes ausreicht. Um dies zu überprüfen, wird zunächst der erforderliche **Zuluftvolumenstrom** des Gebäudes ermittelt:\n",
+    "\n",
+    "\\begin{align}\n",
+    "  {\\dot V}_\\text{ges,zu} &= -0.001\\,A_\\text{N}^2 + 1.15\\,A_\\text{N} + 20\n",
+    "  \\quad\\text{in}\\quad \\dfrac{m^3}{h},\\\\\n",
+    "  &\\phantom{xxx}\\quad\\text{mit}\\quad A_\\text{N}: \\text{Nutzfläche in } m^2\n",
+    "\\end{align}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "slide"
+    }
+   },
+   "source": [
+    "Der zum **Feuchteschutz** benötigte Volumenstrom ist gegeben durch\n",
+    "\n",
+    "\\begin{align}\n",
+    "  {\\dot V}_\\text{FL} &=\n",
+    "  \\begin{cases}\n",
+    "    0.3 \\,{\\dot V}_\\text{ges,zu} & \\text{Wärmedämmun mindestens nach WSchV95}\\\\\n",
+    "    0.4 \\,{\\dot V}_\\text{ges,zu} & \\text{sonst}\n",
+    "  \\end{cases}\n",
+    "\\end{align}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "slide"
+    }
+   },
+   "source": [
+    "Der gesamte **Abluftvolumenstrom** wird ermittelt aus den erforderlichen Mindestabluftvolumenströmen der Ablufträume:\n",
+    "\n",
+    "$$\n",
+    "  {\\dot V}_\\text{ges,ab} = \\sum_{j\\in\\text{Ab}} {\\dot V}_{j,\\min}\n",
+    "$$"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "slide"
+    }
+   },
+   "source": [
+    "Dabei sind die erforderlichen **Mindestabluftvolumenströme** festgelegt durch\n",
+    "\n",
+    "\\begin{align}\n",
+    "  {\\dot V_\\min} = \n",
+    "  \\begin{cases}\n",
+    "    25\\,\\dfrac{m^3}{h} & \\text{WC} \\\\\n",
+    "    25\\,\\dfrac{m^3}{h} & \\text{Flur}\\\\\n",
+    "    25\\,\\dfrac{m^3}{h} & \\text{Abstellraum}\\\\\n",
+    "    25\\,\\dfrac{m^3}{h} & \\text{Hausarbeitsraum}\\\\\n",
+    "    45\\,\\dfrac{m^3}{h} & \\text{Küche}\\\\\n",
+    "    45\\,\\dfrac{m^3}{h} & \\text{Bad}\\\\\n",
+    "  \\end{cases}\n",
+    "\\end{align}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "slide"
+    }
+   },
+   "source": [
+    "Der gesamte erforderliche Volumenstrom ergibt sich dann als Maximum der zuvor berechneten Volumenströme:\n",
+    "\n",
+    "$$\n",
+    "  {\\dot V}_\\text{ges} = \\max\\left({\\dot V}_\\text{ges,zu},{\\dot V}_\\text{ges,ab}\\right)\n",
+    "$$"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "slide"
+    }
+   },
+   "source": [
+    "Der **Infiltrationsvolumenstrom** wird berechnet durch\n",
+    "\n",
+    "$$\n",
+    "  {\\dot V}_\\text{inf} = f_\\text{inf}\\,A_\\text{N}\\,h\\,n_{50}\\cdot\n",
+    "  \\left(\n",
+    "    \\dfrac{\\Delta p}{50\\,\\text{Pa}}\n",
+    "  \\right)^{0.667}\n",
+    "$$\n",
+    "\n",
+    "Dabei ist der Infiltrationsfaktor $f_\\text{inf}$ gegeben durch\n",
+    "\n",
+    "\\begin{align}\n",
+    "  f_\\text{inf} =\n",
+    "  \\begin{cases}\n",
+    "    0.50 & \\text{Einfamilienhaus}\\\\\n",
+    "    0.45 & \\text{Mehrfamilienhaus ohne Installationsschacht}\\\\\n",
+    "    0.40 & \\text{Mehrfamilienhaus mit Installationsschacht}\n",
+    "  \\end{cases}\n",
+    "\\end{align}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "slide"
+    }
+   },
+   "source": [
+    "Der Druckverlust $\\Delta p$ hängt vom Winddruck auf das Gebäude ab. Ist dieser nicht bekannt, so wird er mit der folgenden Formel abgeschätzt:\n",
+    "\n",
+    "\\begin{align}\n",
+    "  \\Delta p =\n",
+    "  \\begin{cases}\n",
+    "    2\\,\\text{Pa} & \\text{Eingeschossig, windschwaches Gebiet}, \\\\\n",
+    "    4\\,\\text{Pa} & \\text{Eingeschossig, windstarkes Gebiet}, \\\\\n",
+    "    5\\,\\text{Pa} & \\text{Mehrgeschossig, windschwaches Gebiet}, \\\\\n",
+    "    7\\,\\text{Pa} & \\text{Mehrgeschossig, windstarkes Gebiet}. \\\\\n",
+    "  \\end{cases}\n",
+    "\\end{align}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "slide"
+    }
+   },
+   "source": [
+    "Ein Belüftungskonzept ist nötig, wenn der Infiltrationsvolumenstrom nicht ausreicht, um den Feuchteschutz sicherzustellen:\n",
+    "\n",
+    "$$\n",
+    "  {\\dot V}_\\text{FL} < {\\dot V}_\\text{inf}\n",
+    "  \\implies\\quad\n",
+    "  \\text{Belüftungskonzept ist nötig}\n",
+    "$$"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "source": [
+    "Wird die Belüftung maschinell sichergestellt, so kann der Infiltrationsvolumenstrom vom erforderlichen Volumenstrom abgezogen werden. Der erforderliche **Ventilatorvolumenstrom** ist dann\n",
+    "\n",
+    "$$\n",
+    "  {\\dot V}_\\text{L} = {\\dot V}_\\text{ges,zu} - {\\dot V}_\\text{inf}\n",
+    "$$"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "python 3.6",
+   "language": "python",
+   "name": "python36"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.8"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 1
+}
